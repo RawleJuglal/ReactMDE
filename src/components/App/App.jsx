@@ -44,6 +44,15 @@ function App() {
         }) 
     }
     
+    function deleteNote(event, noteId) {
+        event.stopPropagation()
+        setNotes((prevNotes)=>{
+            return prevNotes.filter((note)=>{
+                return note.id != noteId && note
+            })
+        })
+    }
+
     //looks at the array and returns the first note that matches the currentNoteId otherwise returns first note
     function findCurrentNote() {
         return notes.find(note => {
@@ -71,6 +80,7 @@ function App() {
                     currentNote={findCurrentNote()}
                     setCurrentNoteId={setCurrentNoteId}
                     newNote={createNewNote}
+                    deleteNote={deleteNote}
                 />
                 {
                     currentNoteId && 
