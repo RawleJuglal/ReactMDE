@@ -12,7 +12,7 @@ export default function Sidebar(props) {
                 //onclick will call parent function setCurrentNoteId with the selected notes id
                 onClick={() => props.setCurrentNoteId(note.id)}
             >
-                <h4 className="text-snippet">Note {index + 1}</h4>
+                <h4 className="text-snippet">{note.body.split('\n')[0]}</h4>
             </div>
         </div>
     ))

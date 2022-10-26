@@ -7,13 +7,17 @@ import Sidebar from '../Sidebar/Sidebar'
 import Editor from '../Editor/Editor'
 
 function App() {
-  //state notes set to empty array
-  const [notes, setNotes] = React.useState([])
+    //state notes set to empty array
+    const [notes, setNotes] = React.useState(() => JSON.parse(localStorage.getItem('notes')) || [])
     //state currentNoteID set to first notes index and notindex id
     const [currentNoteId, setCurrentNoteId] = React.useState(
         (notes[0] && notes[0].id) || ""
     )
     
+    React.useEffect(()=>{
+        localStorage.setItem('notes', JSON.stringify(notes))
+    }, [notes])
+
     //function create a new note
     function createNewNote() {
       //makes an object w/ id and body keys
@@ -29,16 +33,15 @@ function App() {
     
     //function to update a note
     function updateNote(text) {
-       //this function takes text property
-        
-        //gets array of old notes
-        //go through all notes if the currentNoteId matches return that note w/ the new text otherwise return the note the way it is
-        //sets notes to this new mapped array
-        setNotes(oldNotes => oldNotes.map(oldNote => {
-            return oldNote.id === currentNoteId
-                ? { ...oldNote, body: text }
-                : oldNote
-        }))
+        // Put the most recently-modified
+        // note to be at the top  
+        setNotes((prevNotes)=>{
+            const newArray = [];
+            for(const note of prevNotes){
+                note.id == currentNoteId ? newArray.unshift({...note, body:text}) : newArray.push(note)
+            }
+            return newArray;
+        }) 
     }
     
     //looks at the array and returns the first note that matches the currentNoteId otherwise returns first note
