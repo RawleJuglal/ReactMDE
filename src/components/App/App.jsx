@@ -1,6 +1,5 @@
 import React from 'react'
 import './App.css'
-// import Data from '../../data'
 import Split from 'react-split'
 import {nanoid} from 'nanoid'
 import Sidebar from '../Sidebar/Sidebar'
