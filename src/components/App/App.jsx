@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import Split from 'react-split'
-import {nanoid} from 'nanoid'
+import Nanoid from 'nanoid'
 import Sidebar from '../Sidebar/Sidebar'
 import Editor from '../Editor/Editor'
 
@@ -21,7 +21,7 @@ function App() {
     function createNewNote() {
       //makes an object w/ id and body keys
         const newNote = {
-            id: nanoid(),
+            id: Nanoid(),
             body: "# Type your markdown note's title here"
         }
         //sets notes state to an array w/ the newNote just made and then all the previous notes
